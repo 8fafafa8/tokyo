@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本旅游行程计划</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(120deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .day-container {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .day-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .day-header {
+            background: linear-gradient(120deg, #4b6cb7 0%, #182848 100%);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .day-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .day-date {
+            font-size: 1.1rem;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .schedule-table th, .schedule-table td {
+            padding: 15px 10px;
+            text-align: left;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .schedule-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .schedule-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .time-cell {
+            font-weight: 600;
+            color: #2c3e50;
+            width: 120px;
+        }
+        
+        .activity-cell {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .activity-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .activity-duration {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+        }
+        
+        .travel-time {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .travel-time i {
+            margin-right: 5px;
+        }
+        
+        .meal-activity {
+            background-color: #fff3e0;
+        }
+        
+        .meal-activity .activity-title {
+            color: #e65100;
+        }
+        
+        .breakfast {
+            background-color: #e8f5e9;
+        }
+        
+        .breakfast .activity-title {
+            color: #2e7d32;
+        }
+        
+        .attraction {
+            background-color: #f3e5f5;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .breakfast-legend {
+            background-color: #e8f5e9;
+        }
+        
+        .meal-legend {
+            background-color: #fff3e0;
+        }
+        
+        .travel-legend {
+            background-color: #e3f2fd;
+        }
+        
+        @media (max-width: 768px) {
+            .schedule-table th:nth-child(3),
+            .schedule-table td:nth-child(3) {
+                display: none;
+            }
+            
+            .time-cell {
+                width: 90px;
+            }
+            
+            .day-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>日本东京及周边之旅</h1>
+            <p class="subtitle">2025年9月10日 - 2025年9月16日 | 7天完美行程计划</p>
+        </header>
+
+        <!-- 第1天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day1')">
+                <div class="day-title">第1天 · 抵达东京</div>
+                <div class="day-date">2025/09/10（星期三）</div>
+            </div>
+            <table class="schedule-table" id="day1">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr>
+                    <td class="time-cell">14:10</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">起飞</span>
+                    </td>
+                    <td>飞机上</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">22:35</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">抵达羽田机场</span>
+                    </td>
+                    <td>羽田机场(HND)</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">前往名宿</span>
+                        <span class="activity-duration">预计40分钟车程</span>
+                    </td>
+                    <td>名宿</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第2天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day2')">
+                <div class="day-title">第2天 · 自由行</div>
+                <div class="day-date">2025/09/11（星期四）</div>
+            </div>
+            <table class="schedule-table" id="day2">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr class="breakfast">
+                    <td class="time-cell">09:30</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发 （早餐昨天便利店买）</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">花园神社游览</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>花园神社</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">黄金街漫步</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>新宿黄金街</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">伊势丹百货购物 （午餐）</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>伊势丹百货新宿店</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约2分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">新宿Marui购物</span>
+                        <span class="activity-duration">预计停留: 1.5小时</span>
+                    </td>
+                    <td>新宿Marui Main Building</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">迪士尼商店购物</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>迪士尼商店</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约12分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">巨型3D猫 / 回忆小巷</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>新宿西口区域</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">新都心步道桥打卡</span>
+                    </td>
+                    <td>新宿西口</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Tokyu Kabukicho Tower游览 （晚餐）</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>Tokyu Kabukicho Tower</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约2分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Toho Cinema打卡</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>Toho Cinema</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约3分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">歌舞伎町体验</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>歌舞伎町</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">唐吉诃德购物 （930要去地铁了）</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>唐吉诃德</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第3天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day3')">
+                <div class="day-title">第3天 · 迪士尼乐园</div>
+                <div class="day-date">2025/09/12（星期五）</div>
+            </div>
+            <table class="schedule-table" id="day3">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr class="breakfast">
+                    <td class="time-cell">09:30</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发去disney (早餐昨天便利店买)</span>
+                    </td>
+                    <td>酒店附近</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-train"></i> 约50分钟</td>
+                </tr>
+                <tr>
+                    <td class="time-cell"></td>
+                    <td class="activity-cell">
+                        <span class="activity-title">迪士尼乐园游玩</span>
+                        <span class="activity-duration">全天游玩</span>
+                    </td>
+                    <td>东京迪士尼乐园</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-train"></i> 返回酒店，约50分钟</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第4天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day4')">
+                <div class="day-title">第4天 · 东京经典游</div>
+                <div class="day-date">2025/09/13（星期六）</div>
+            </div>
+            <table class="schedule-table" id="day4">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr>
+                    <td class="time-cell">09:00</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发（早餐便利店昨天买）</span>
+                    </td>
+                    <td>酒店</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约20分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">阿美横丁购物</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>阿美横丁商店街</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约2分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Yamashiroya玩具店</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>Yamashiroya</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">浅草寺观光</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>浅草寺</td>
+                </tr>
+                <tr class="meal-activity">
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">【午餐】小吃</span>
+                    </td>
+                    <td>浅草寺周边</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">晴空塔观光购物</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>东京晴空塔</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约25分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">东京铁塔打卡</span>
+                        <span class="activity-duration">预计停留: 45分钟</span>
+                    </td>
+                    <td>东京铁塔</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">国立新美术馆参观</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>国立新美术馆</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Shibuya Sky观景</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>Shibuya Sky</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约8分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">竹下通购物（晚餐）</span>
+                        <span class="activity-duration">预计停留: 1.5小时</span>
+                    </td>
+                    <td>竹下通</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">涩谷Loft购物</span>
+                        <span class="activity-duration">预计停留: 1.5小时</span>
+                    </td>
+                    <td>涩谷Loft</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约2分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">涩谷Scramble Crossing体验</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>涩谷Scramble Crossing</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第5天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day5')">
+                <div class="day-title">第5天 · 横滨-镰仓怀旧之旅</div>
+                <div class="day-date">2025/09/14（星期日）</div>
+            </div>
+            <table class="schedule-table" id="day5">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr class="breakfast">
+                    <td class="time-cell">09:00</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发（早餐昨天便利店买）</span>
+                    </td>
+                    <td>酒店</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约40分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">黄家驹住所打卡</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>横滨</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约20分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">藤子·F·不二雄博物馆（午餐）</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>川崎市</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约45分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">鹤冈八幡宫参观</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>镰仓</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">小町通购物</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>镰仓</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">镰仓大佛参观</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>高德院</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约8分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">七里滨漫步</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>七里滨</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">镰仓高校前打卡 （晚餐）</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>镰仓高校前站</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">江之岛观光</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>江之岛</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约45分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">横滨中华街拍照</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>横滨中华街</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Cosmo World摩天轮</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>Cosmo World</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 返回东京酒店，约40分钟</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第6天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day6')">
+                <div class="day-title">第6天 · 富士山之旅</div>
+                <div class="day-date">2025/09/15（星期一）</div>
+            </div>
+            <table class="schedule-table" id="day6">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr class="breakfast">
+                    <td class="time-cell">07:00</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发（早餐昨天便利店买）</span>
+                    </td>
+                    <td>酒店附近</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约1小时40分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">新仓山浅间公园</span>
+                        <span class="activity-duration">预计停留: 1.5小时</span>
+                    </td>
+                    <td>富士吉田市</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">天梯小镇拍照</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>日川时计店街道</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">富士急乐园拍照</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>富士急乐园</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">罗森便利店打卡</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>Lawson(河口湖站前店)</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Lawson打卡</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>Lawson(富士河口湖町役场店)</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">13:30</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">河口湖缆车（午餐）</span>
+                        <span class="activity-duration">预计停留: 1.5小时</span>
+                    </td>
+                    <td>河口湖</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">河口湖大石公园</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>大石公园</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 返回东京，约2小时车程</td>
+                </tr>
+                <tr class="meal-activity">
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">Sunshine City Mall【晚餐】</span>
+                    </td>
+                    <td>Sunshine City Mall</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 第7天 -->
+        <div class="day-container">
+            <div class="day-header" onclick="toggleDay('day7')">
+                <div class="day-title">第7天 · 东京最后之旅 & 返程</div>
+                <div class="day-date">2025/09/16（星期二）</div>
+            </div>
+            <table class="schedule-table" id="day7">
+                <tr>
+                    <th>时间</th>
+                    <th>活动内容</th>
+                    <th>地点</th>
+                </tr>
+                <tr class="breakfast">
+                    <td class="time-cell">08:00</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">【早餐】便利商店昨天买</span>
+                    </td>
+                    <td>酒店附近</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">08:00</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">出发</span>
+                    </td>
+                    <td>酒店</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">须贺神社打卡</span>
+                        <span class="activity-duration">预计停留: 15分钟</span>
+                    </td>
+                    <td>须贺神社</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">明治神宫参观</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>明治神宫</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-walking"></i> 步行约5分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">东急Plaza表参道原宿购物</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>表参道</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约20分钟至下一景点</td>
+                </tr>
+                <tr class="meal-activity">
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">【午餐】</span>
+                    </td>
+                    <td>筑地市场</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">筑地市场游览</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>筑地市场</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约20分钟至下一景点</
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">秋叶原Radio会馆购物</span>
+                        <span class="activity-duration">预计停留: 1小时</span>
+                    </td>
+                    <td>秋叶原</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约10分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">东京国立博物馆参观</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>上野</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约15分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">银座购物</span>
+                        <span class="activity-duration">预计停留: 2小时</span>
+                    </td>
+                    <td>银座</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约25分钟至下一景点</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">台场海滨公园游览（730要离开）</span>
+                        <span class="activity-duration">预计停留: 30分钟</span>
+                    </td>
+                    <td>台场</td>
+                </tr>
+                <tr class="travel-time">
+                    <td colspan="3"><i class="fas fa-car"></i> 驾车约20分钟至机场</td>
+                </tr>
+                <tr class="meal-activity">
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">【晚餐】</span>
+                    </td>
+                    <td>羽田机场</td>
+                </tr>
+                <tr>
+                    <td class="time-cell">-</td>
+                    <td class="activity-cell">
+                        <span class="activity-title">办理登机手续</span>
+                    </td>
+                    <td>羽田机场</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>日本旅行行程计划 | 2025年9月10日-16日 | 包含所有景点间交通时间</p>
+            <p>注：所有交通时间均为预估，可能会因实际交通状况而变化，请预留缓冲时间。</p>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color breakfast-legend"></div>
+                    <span>早餐</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color meal-legend"></div>
+                    <span>午餐/晚餐</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color travel-legend"></div>
+                    <span>交通时间</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 切换天的展开/收起状态
+        function toggleDay(dayId) {
+            const table = document.getElementById(dayId);
+            if (table.style.display === 'none') {
+                table.style.display = 'table';
+            } else {
+                table.style.display = 'none';
+            }
+        }
+
+        // 展开所有天数
+        function expandAll() {
+            const tables = document.querySelectorAll('.schedule-table');
+            tables.forEach(table => {
+                table.style.display = 'table';
+            });
+        }
+
+        // 收起所有天数
+        function collapseAll() {
+            const tables = document.querySelectorAll('.schedule-table');
+            tables.forEach(table => {
+                table.style.display = 'none';
+            });
+        }
+
+        // 初始状态下收起所有天数
+        document.addEventListener('DOMContentLoaded', function() {
+            collapseAll();
+        });
+    </script>
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
